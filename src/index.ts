@@ -53,6 +53,8 @@ class Lecturer {
     this._contacts = contacts;
   }
 }
+type developerLevel = 'junior' | 'middle' | 'senior';
+type statusGroup = 'not learn' | 'learn' | 'finish learn';
 
 class School {
   // implement 'add area', 'remove area', 'add lecturer', and 'remove lecturer' methods
@@ -92,8 +94,6 @@ class School {
     }
   }
 }
-
-type developerLevel = 'junior' | 'middle' | 'senior';
 
 class Area {
   // implement getters for fields and 'add/remove level' methods
@@ -158,7 +158,6 @@ class Level {
   }
 }
 
-type statusGroup = 'not learn' | 'learn' | 'finish learn';
 class Group {
   // implement getters for fields and 'add/remove student' and 'set status' methods
 
