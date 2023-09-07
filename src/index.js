@@ -74,6 +74,15 @@ var Lecturer = /** @class */ (function () {
     });
     return Lecturer;
 }());
+var AreaName;
+(function (AreaName) {
+    AreaName["FrontEnd"] = "Front-End";
+    AreaName["BaclEnd"] = "Back-end";
+    AreaName["Java"] = "Java";
+    AreaName["CSharp"] = "C#";
+    AreaName["Python"] = "Python";
+    AreaName["Design"] = "Design & UI/UX";
+})(AreaName || (AreaName = {}));
 var School = /** @class */ (function () {
     function School() {
         // implement 'add area', 'remove area', 'add lecturer', and 'remove lecturer' methods
@@ -138,7 +147,7 @@ var Area = /** @class */ (function () {
         this._levels.push(value);
     };
     Area.prototype.removeLevel = function (removeLevel) {
-        var removePosition = this._levels.findIndex(function (value) { return JSON.stringify(value) === JSON.stringify(removeLevel); });
+        var removePosition = this._levels.findIndex(function (value) { return value.name === removeLevel.name; });
         if (removePosition >= 0) {
             this._levels.splice(removePosition, 1);
         }
@@ -177,7 +186,7 @@ var Level = /** @class */ (function () {
         this._groups.push(group);
     };
     Level.prototype.removeGroup = function (removeGroup) {
-        var removePosition = this._groups.findIndex(function (value) { return JSON.stringify(value) === JSON.stringify(removeGroup); });
+        var removePosition = this._groups.findIndex(function (value) { return value.area.name === removeGroup.area.name; });
         this._groups.splice(removePosition, 1);
     };
     return Level;
@@ -210,7 +219,7 @@ var Group = /** @class */ (function () {
         this._students.push(student);
     };
     Group.prototype.removeStudent = function (removeStudent) {
-        var removePosition = this._students.findIndex(function (value) { return JSON.stringify(value) === JSON.stringify(removeStudent); });
+        var removePosition = this._students.findIndex(function (value) { return value.fullName === removeStudent.fullName; });
         this._students.splice(removePosition, 1);
     };
     Group.prototype.showPerformance = function () {

@@ -56,6 +56,15 @@ class Lecturer {
 type developerLevel = 'junior' | 'middle' | 'senior';
 type statusGroup = 'not learn' | 'learn' | 'finish learn';
 
+enum AreaName {
+  FrontEnd = 'Front-End',
+  BaclEnd = 'Back-end',
+  Java = 'Java',
+  CSharp = 'C#',
+  Python = 'Python',
+  Design = 'Design & UI/UX',
+}
+
 class School {
   // implement 'add area', 'remove area', 'add lecturer', and 'remove lecturer' methods
 
@@ -98,7 +107,7 @@ class School {
 class Area {
   // implement getters for fields and 'add/remove level' methods
   _levels: Level[] = [];
-  _name: string;
+  _name: AreaName;
 
   get name(): string {
     return this._name;
@@ -108,7 +117,7 @@ class Area {
     return this._levels;
   }
 
-  constructor(name: string) {
+  constructor(name: AreaName) {
     this._name = name;
   }
 
@@ -117,7 +126,7 @@ class Area {
   }
 
   removeLevel(removeLevel: Level): void {
-    const removePosition = this._levels.findIndex(value => JSON.stringify(value) === JSON.stringify(removeLevel));
+    const removePosition = this._levels.findIndex(value => value.name === removeLevel.name);
     if (removePosition >= 0) {
       this._levels.splice(removePosition, 1);
     }
@@ -153,7 +162,7 @@ class Level {
   }
 
   removeGroup(removeGroup: Group): void {
-    const removePosition = this._groups.findIndex(value => JSON.stringify(value) === JSON.stringify(removeGroup));
+    const removePosition = this._groups.findIndex(value => value.area.name === removeGroup.area.name);
     this._groups.splice(removePosition, 1);
   }
 }
@@ -188,7 +197,7 @@ class Group {
   }
 
   removeStudent(removeStudent: Student): void {
-    const removePosition = this._students.findIndex(value => JSON.stringify(value) === JSON.stringify(removeStudent));
+    const removePosition = this._students.findIndex(value => value.fullName === removeStudent.fullName);
     this._students.splice(removePosition, 1);
   }
 
@@ -201,7 +210,7 @@ class Group {
 }
 
 class Students extends Array {
-  toSorted = function (func: any): unknown[] {
+  toSorted = function (func: (a: any, b: any) => number): unknown[] {
     return Array.from(this).sort(func);
   };
 }
